@@ -1,0 +1,18 @@
+@if (authService.loggedInUser; as loggedInUser) {
+  <button id="dropdownDefaultButton" (click)="toggleDropdown()" class="flex items-center justify-between gap-2 bg-[#1D2025] text-white px-6 rounded-lg h-[44px] min-w-44 text-base border-none bg-opacity-50 hover:bg-opacity-100 transition duration-300 element-shadow">
+    <div class="flex items-center gap-2">
+      <ng-icon name="heroUserCircleSolid" size="20" class="text-white"></ng-icon>
+      {{ loggedInUser.userProfile.name }}
+    </div>
+    <ng-icon name="heroChevronDownSolid" size="20" class="text-white"></ng-icon>
+  </button>
+}
+
+<div id="dropdown" [ngClass]="{'open': isDropdownOpen}" class="z-10 p-2 space-y-2 bg-[#1D2025] text-white bg-opacity-50 divide-y rounded-lg element-shadow w-44">
+  <button class="flex items-center justify-between gap-2 bg-[#1D2025] text-white px-3 rounded-lg h-[44px] w-full text-base border-none bg-opacity-0 hover:bg-opacity-100 transition duration-300 element-shadow">
+    ตั้งค่า
+  </button>
+  <button class="flex items-center justify-between gap-2 bg-red-600 text-white px-3 rounded-lg h-[44px] w-full text-base border-none bg-opacity-0 hover:bg-opacity-100 transition duration-300 element-shadow">
+    ออกจากระบบ
+  </button>
+</div>

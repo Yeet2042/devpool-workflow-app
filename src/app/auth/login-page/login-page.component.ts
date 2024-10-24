@@ -42,15 +42,15 @@ export class LoginPageComponent implements OnInit {
     if (this.code) {
       this.authService
         .loginOauth2(this.code)
-        .subscribe(() => this.router.navigate(['/']));
+        .subscribe(() => this.router.navigate(['/budget']));
     }
   }
 
   onLogin() {
     this.authService.login(this.fg.getRawValue()).subscribe({
       next: () => {
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/'; // add
-        this.router.navigate([returnUrl]); // add
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigate([returnUrl]);
       },
       error: (error) => (this.error = error)
     });

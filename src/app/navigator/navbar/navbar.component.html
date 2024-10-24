@@ -6,7 +6,15 @@
         <ng-icon name="heroSunSolid" size="24" class="text-white element-shadow"/>
         <ng-icon name="heroGlobeAsiaAustraliaSolid" size="24" class="text-white element-shadow"/>
       </div>
-      <app-login-button></app-login-button>
+      @if (authService.loggedInUser; as loggedInUser) {
+        <button class="flex items-center gap-2 bg-green-400 text-white px-6 rounded-lg h-[44px] text-base border-none bg-opacity-50 hover:bg-opacity-100 transition duration-300 element-shadow">
+          <ng-icon name="heroPlusSolid" size="20" class="text-white"></ng-icon>
+          เพิ่มงบประมาณ
+        </button>
+        <app-user-dropdown></app-user-dropdown>
+      } @else {
+        <app-login-button></app-login-button>
+      }
     </div>
   </div>
 </div>

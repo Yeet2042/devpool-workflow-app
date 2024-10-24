@@ -9,5 +9,9 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.routes')
+  },
+  {
+    path: 'budget',
+    loadChildren: () => import('./budget/budget.routes')
   }
 ];
