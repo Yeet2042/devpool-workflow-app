@@ -1,0 +1,54 @@
+<div class="w-full h-full flex items-center justify-center">
+  <div class="container max-w-5xl h-[650px] bg-[#282C34] bg-opacity-20 shadow-2xl rounded-lg">
+    <div class="w-1/2 p-16 h-full bg-[#282C34] bg-opacity-80 rounded-tl-lg rounded-bl-lg">
+      <img [routerLink]="homePage" src="/img/logo.png" alt="logo" class="element-shadow">
+      <div class="flex-col gap-4 space-y-4">
+        <div class="flex-col pb-1">
+          <h1 class="text-white h-8 text-[36px]">ยินดีต้อนรับกลับ!</h1>
+          <p class="text-white">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
+        </div>
+        <form [formGroup]="fg" (ngSubmit)="onLogin()" class="space-y-4">
+          @if (error) {
+            <div *ngIf="error.status === 401" class="text-red-600">
+              อีเมลล์หรือรหัสผ่านไม่ถูกต้อง
+            </div>
+            <div *ngIf="error.status !== 401" class="text-red-600">
+              เกิดข้อผิดพลาดในการเช้าสู่ระบบ
+            </div>
+          }
+          <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-full py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
+            <ng-icon name="heroEnvelopeSolid" class="mr-2"></ng-icon>
+            <input
+              id="email"
+              formControlName="email"
+              type="email"
+              placeholder="กรุณาใส่อีเมลล์"
+              class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
+            />
+          </div>
+          <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-full py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
+            <ng-icon name="heroLockClosedSolid" class="mr-2"></ng-icon>
+            <input
+              id="password"
+              formControlName="password"
+              type="password"
+              placeholder="กรุณาใส่รหัสผ่าน"
+              class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
+            />
+          </div>
+          <button type="submit" class="bg-primary text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-50 hover:bg-opacity-100 transition duration-300 element-shadow">
+            เข้าสู่ระบบ
+          </button>
+        </form>
+        <div class="flex items-center">
+          <hr class="border-x border-white my-4 flex-grow" />
+          <p class="text-white text-sm mx-4">หรือ</p>
+          <hr class="border-x border-white my-4 flex-grow" />
+        </div>
+        <button [routerLink]="" class="flex items-center justify-center bg-white text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-20 hover:bg-opacity-30 transition duration-300 element-shadow">
+          <img src="/img/Keycloak-logo.png" alt="Keycloak logo" class="h-12 ml-2 element-shadow" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

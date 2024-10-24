@@ -1,14 +1,12 @@
 <div class="relative w-screen h-16">
   <div class="container mx-auto flex items-center justify-between max-w-5xl px-4">
-    <img src="/img/logo.png" alt="logo" class="element-shadow">
+    <img [routerLink]="homePage" src="/img/logo.png" alt="logo" class="element-shadow">
     <div class="flex items-center gap-8">
       <div class="flex items-center gap-4">
         <ng-icon name="heroSunSolid" size="24" class="text-white element-shadow"/>
         <ng-icon name="heroGlobeAsiaAustraliaSolid" size="24" class="text-white element-shadow"/>
       </div>
-      <button class="bg-primary text-white px-6 rounded-lg h-[44px] text-base border-none bg-opacity-50 hover:bg-opacity-100 transition duration-300 element-shadow">
-        เข้าสู่ระบบ
-      </button>
+      <app-login-button></app-login-button>
     </div>
   </div>
 </div>

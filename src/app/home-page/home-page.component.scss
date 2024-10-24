@@ -1,0 +1,25 @@
+.text-shadow {
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 0 20px;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.moving-gradient-text {
+  filter: drop-shadow(rgba(0, 0, 0, 0.5) 1px 0 20px);
+  background: linear-gradient(90deg, #C678DD, #FFFFFF, #5C0771);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 5s ease-in-out infinite;
+}
