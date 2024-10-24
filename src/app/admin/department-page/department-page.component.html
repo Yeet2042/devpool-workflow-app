@@ -10,7 +10,7 @@
       <div class="flex space-x-10">
         <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
           <h1 class="text-[48px] h-6">{{ departments.length }}</h1>
-          <h2>พนักงานแผนก</h2>
+          <h2>แผนกทั้งหมด</h2>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
           <p class="w-[800px]">{{ department.name }}</p>
         </div>
         <div class="flex space-x-2">
-          <button class="flex items-center gap-2 bg-[#E5C07B] text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+          <button (click)="openModal()" class="flex items-center gap-2 bg-[#E5C07B] text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
             <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
             แก้ไข
           </button>
@@ -71,5 +71,24 @@
         </div>
       </div>
     }
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
+  <div class="relative container py-16 px-8 space-y-8 w-[565px] bg-[#282C34] bg-opacity-90 rounded-lg shadow-xl">
+    <h1 class="text-white text-center">แก้ไขแผนก</h1>
+    <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-full py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
+      <input
+        id="name"
+        formControlName="text"
+        type="text"
+        placeholder="ชื่อแผนก"
+        class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
+      />
+    </div>
+    <button type="submit" class="bg-green-400 text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+      ยืนยัน
+    </button>
+    <ng-icon (click)="closeModal()" name="heroXMarkSolid" size="24" class="absolute top-0 right-6 text-white"></ng-icon>
   </div>
 </div>

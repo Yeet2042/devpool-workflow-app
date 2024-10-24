@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroMagnifyingGlassSolid, heroPencilSquareSolid } from '@ng-icons/heroicons/solid';
+import { heroMagnifyingGlassSolid, heroPencilSquareSolid, heroPlusSolid, heroXMarkSolid  } from '@ng-icons/heroicons/solid';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Item, ItemStatus } from '../models/item';
 import { FormControl } from '@angular/forms';
 import { ENV_CONFIG } from '../../../env.config';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-items-page',
   standalone: true,
-  imports: [NgIconComponent, DatePipe, RouterLink],
-  providers: [provideIcons({ heroMagnifyingGlassSolid, heroPencilSquareSolid })],
+  imports: [NgIconComponent, DatePipe, RouterLink, NgIf],
+  providers: [provideIcons({ heroMagnifyingGlassSolid, heroPencilSquareSolid, heroPlusSolid, heroXMarkSolid })],
   templateUrl: './items-page.component.html',
   styleUrl: './items-page.component.scss'
 })
@@ -27,6 +27,16 @@ export class ItemsPageComponent {
   items: Item[] = [];
   filterItems = this.items;
   filterInput = new FormControl<string>('', { nonNullable: true })
+
+  isModalOpen = false;
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
   constructor () {
     const headers = new HttpHeaders({
