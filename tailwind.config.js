@@ -8,7 +8,10 @@ module.exports = {
       colors: {
         primary: '#5C0771',
         primaryText: '#C678DD'
-      }
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],

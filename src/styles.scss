@@ -16,6 +16,10 @@
   }
 }
 
+.element-shadow {
+  filter: drop-shadow(rgba(0, 0, 0, 0.5) 1px 0 20px);
+}
+
 html, body {
   margin: 0;
   padding: 0;
