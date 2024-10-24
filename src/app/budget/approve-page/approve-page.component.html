@@ -9,7 +9,7 @@
       </div>
       <div class="flex space-x-10">
         <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
-          <h1 class="text-[48px] h-6">{{ pendingCount }}</h1>
+          <h1 class="text-[48px] h-6">{{ items.length }}</h1>
           <h2>รอดำเนินการ</h2>
         </div>
       </div>
@@ -23,16 +23,16 @@
       </button>
         <button routerLink="/budget/approve" class="flex items-center justify-between gap-2 bg-green-400 text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
           อนุมัติรายการ
-          @if (pendingCount > 0) {
+          @if (items.length > 0) {
             <span class="absolute top-[-3px] right-[-3px] block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
           }
         </button>
       </div>
       <div class="flex gap-4 items-center">
-        <button class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+        <button routerLink="/admin/department" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
           จัดการแผนก
         </button>
-        <button class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+        <button routerLink="/admin/employee" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
           จัดการพนักงาน
         </button>
       </div>
@@ -71,11 +71,11 @@
         </div>
         <div class="flex space-x-2">
           <button class="flex items-center gap-2 bg-green-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
-            <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
+            <ng-icon name="heroCheckSolid" size="20"></ng-icon>
             อนุมัติ
           </button>
           <button class="flex items-center gap-2 bg-red-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
-            <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
+            <ng-icon name="heroXMarkSolid" size="20"></ng-icon>
             ไม่อนุมัติ
           </button>
         </div>

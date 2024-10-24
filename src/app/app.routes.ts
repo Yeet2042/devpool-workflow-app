@@ -13,5 +13,9 @@ export const routes: Routes = [
   {
     path: 'budget',
     loadChildren: () => import('./budget/budget.routes')
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.routes')
   }
 ];
