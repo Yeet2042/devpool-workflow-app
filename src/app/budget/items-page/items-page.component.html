@@ -1,1 +1,93 @@
-<p>items-page works!</p>
+<div class="flex-col max-w-[1425px] mx-auto">
+  <div class="mt-12 w-full bg-[#282C34] bg-opacity-50 element-shadow rounded-lg">
+    <div class="flex justify-between items-center py-10 px-16">
+      <div>
+        @if (authService.loggedInUser; as loggedInUser) {
+          <h1 class="text-white text-[64px] font-extrabold h-10">{{ loggedInUser.userProfile.department.name }}</h1>
+          <h2 class="text-white text-[32px]">รายการทั้งหมด</h2>
+        }
+      </div>
+      <div class="flex space-x-10">
+        <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
+          <h1 class="text-[48px] h-6">{{ approveCount }}</h1>
+          <h2>อนุมัติ</h2>
+        </div>
+        <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
+          <h1 class="text-[48px] h-6">{{ pendingCount }}</h1>
+          <h2>รอดำเนินการ</h2>
+        </div>
+        <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
+          <h1 class="text-[48px] h-6">{{ rejectCount }}</h1>
+          <h2>ปฎิเสธ</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between gap-4 items-center mt-4 py-4 px-5 w-full bg-[#282C34] bg-opacity-50 element-shadow rounded-lg">
+    <div class="flex justify-between items-center w-full">
+      <div class="flex gap-4 items-center">
+        <button class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+          รายการทั้งหมด
+        </button>
+        <button class="flex items-center justify-between gap-2 bg-green-400 text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+          อนุมัติรายการ
+          @if (pendingCount > 0) {
+            <span class="absolute top-[-3px] right-[-3px] block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+          }
+        </button>
+      </div>
+      <div class="flex gap-4 items-center">
+        <button class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+          จัดการแผนก
+        </button>
+        <button class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+          จัดการพนักงาน
+        </button>
+      </div>
+    </div>
+    <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-[300px] py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
+      <ng-icon name="heroMagnifyingGlassSolid" class="mr-2"></ng-icon>
+      <input
+        id="search"
+        formControlName="search"
+        type="search"
+        placeholder="ค้นหา"
+        class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
+      />
+    </div>
+  </div>
+  <div class="flex gap-2 px-4 items-center w-full bg-opacity-50 element-shadow rounded-lg text-white font-bold text-center">
+    <p class="w-[128px]">ID</p>
+    <p class="w-[150px]">สร้างเมื่อ</p>
+    <p class="w-[150px]">แก้ไขล่าสุด</p>
+    <p class="w-[300px]">รายละเอียด</p>
+    <p class="w-[128px]">จำนวนเงิน</p>
+    <p class="w-[128px]">สร้างโดย</p>
+    <p class="w-[128px]">สถานะ</p>
+  </div>
+  <div class="flex-col space-y-2 items-center w-full bg-opacity-50 element-shadow rounded-lg text-white text-center h-[300px] overflow-auto custom-scrollbar">
+    @for (item of filterItems; track item.item_id) {
+      <div class="flex px-4 justify-between items-center w-full h-16 bg-[#282C34] bg-opacity-50 shadow-lg rounded-lg">
+        <div class="flex gap-2 items-center">
+          <p class="w-[128px]">{{ item.item_id }}</p>
+          <p class="w-[150px]">{{ item.created_at | date: 'short' }}</p>
+          <p class="w-[150px]">{{ item.updated_at | date: 'short' }}</p>
+          <p class="w-[300px]">{{ item.title + ' x ' + item.quantity }}</p>
+          <p class="w-[128px]">{{ item.amount }}</p>
+          <p class="w-[128px]">{{ item.user.name }}</p>
+          @if (item.status === 'APPROVED') {
+            <p class="w-[128px] bg-green-400 text-green-400 bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
+          } @else if (item.status === 'PENDING') {
+            <p class="w-[128px] bg-[#E5C07B] text-[#E5C07B] bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
+          } @else {
+            <p class="w-[128px] bg-red-400 text-red-400 bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
+          }
+        </div>
+        <button class="flex items-center gap-2 bg-[#E5C07B] text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+          <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
+          แก้ไข
+        </button>
+      </div>
+    }
+  </div>
+</div>
