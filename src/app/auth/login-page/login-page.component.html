@@ -45,7 +45,7 @@
           <p class="text-white text-sm mx-4">หรือ</p>
           <hr class="border-x border-white my-4 flex-grow" />
         </div>
-        <button [routerLink]="" class="flex items-center justify-center bg-white text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-20 hover:bg-opacity-30 transition duration-300 element-shadow">
+        <button (click)="onKeycloakLogin()" class="flex items-center justify-center bg-white text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-20 hover:bg-opacity-30 transition duration-300 element-shadow">
           <img src="/img/Keycloak-logo.png" alt="Keycloak logo" class="h-12 ml-2 element-shadow" />
         </button>
       </div>

@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { routes } from '../../app.routes';
 import { HomePageComponent } from '../../home-page/home-page.component';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -16,9 +16,13 @@ import { NgIf } from '@angular/common';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   homePage = routes.find(route => route.component === HomePageComponent)?.path;
 
+  @Input()
+  code = '';
+
+  route = inject(ActivatedRoute)
   router = inject(Router)
 
   authService = inject(AuthService)
@@ -34,15 +38,26 @@ export class LoginPageComponent {
 
   error?: any
 
+  ngOnInit() {
+    if (this.code) {
+      this.authService
+        .loginOauth2(this.code)
+        .subscribe(() => this.router.navigate(['/']));
+    }
+  }
+
   onLogin() {
     this.authService.login(this.fg.getRawValue()).subscribe({
       next: () => {
-        this.router.navigate(['/']);
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/'; // add
+        this.router.navigate([returnUrl]); // add
       },
-      error: (error) => {
-        this.error = error;
-        console.log(error.status);
-      }
-    })
+      error: (error) => (this.error = error)
+    });
+  }
+
+  onKeycloakLogin() {
+    this.authService.getLoginOauth2RedirectUrl()
+      .subscribe((v) => window.location.replace(v.redirectUrl))
   }
 }
