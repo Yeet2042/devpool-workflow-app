@@ -10,14 +10,14 @@ import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-items-page',
+  selector: 'app-approve-page',
   standalone: true,
   imports: [NgIconComponent, DatePipe, RouterLink],
   providers: [provideIcons({ heroMagnifyingGlassSolid, heroPencilSquareSolid })],
-  templateUrl: './items-page.component.html',
-  styleUrl: './items-page.component.scss'
+  templateUrl: './approve-page.component.html',
+  styleUrl: './approve-page.component.scss'
 })
-export class ItemsPageComponent {
+export class ApprovePageComponent {
   private envConfig = inject(ENV_CONFIG)
   readonly apiUrl = `${this.envConfig.apiUrl}/items/all/`;
 
@@ -33,8 +33,8 @@ export class ItemsPageComponent {
       'Authorization': `Bearer ${this.authService.loggedInUser?.tokens.access_token}`
     })
     this.httpClient.get<Item[]>(this.apiUrl, { headers }).subscribe((items) => {
-      this.items = items;
-      this.filterItems = items;
+      this.items = items.filter(item => item.status === ItemStatus.PENDING);
+      this.filterItems = items.filter(item => item.status === ItemStatus.PENDING);
     })
   }
 

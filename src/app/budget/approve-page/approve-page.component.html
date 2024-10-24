@@ -4,21 +4,13 @@
       <div>
         @if (authService.loggedInUser; as loggedInUser) {
           <h1 class="text-white text-[64px] font-extrabold h-10">{{ loggedInUser.userProfile.department.name }}</h1>
-          <h2 class="text-white text-[32px]">รายการทั้งหมด</h2>
+          <h2 class="text-white text-[32px]">อนุมัติรายการ</h2>
         }
       </div>
       <div class="flex space-x-10">
         <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
-          <h1 class="text-[48px] h-6">{{ approveCount }}</h1>
-          <h2>อนุมัติ</h2>
-        </div>
-        <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
           <h1 class="text-[48px] h-6">{{ pendingCount }}</h1>
           <h2>รอดำเนินการ</h2>
-        </div>
-        <div class="flex flex-col items-center justify-center text-white h-[180px] w-[180px] bg-[#282C34] bg-opacity-30 shadow-xl rounded-lg">
-          <h1 class="text-[48px] h-6">{{ rejectCount }}</h1>
-          <h2>ปฎิเสธ</h2>
         </div>
       </div>
     </div>
@@ -75,18 +67,18 @@
           <p class="w-[300px]">{{ item.title + ' x ' + item.quantity }}</p>
           <p class="w-[128px]">{{ item.amount }}</p>
           <p class="w-[128px]">{{ item.user.name }}</p>
-          @if (item.status === 'APPROVED') {
-            <p class="w-[128px] bg-green-400 text-green-400 bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
-          } @else if (item.status === 'PENDING') {
-            <p class="w-[128px] bg-[#E5C07B] text-[#E5C07B] bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
-          } @else {
-            <p class="w-[128px] bg-red-400 text-red-400 bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
-          }
+          <p class="w-[128px] bg-[#E5C07B] text-[#E5C07B] bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
         </div>
-        <button class="flex items-center gap-2 bg-[#E5C07B] text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
-          <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
-          แก้ไข
-        </button>
+        <div class="flex space-x-2">
+          <button class="flex items-center gap-2 bg-green-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+            <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
+            อนุมัติ
+          </button>
+          <button class="flex items-center gap-2 bg-red-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+            <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
+            ไม่อนุมัติ
+          </button>
+        </div>
       </div>
     }
   </div>

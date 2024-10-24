@@ -41,7 +41,7 @@ export class AuthService {
   logout(): void {
     this.loggedInUser = null;
     sessionStorage.removeItem(this.TOKENS);
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/']);
   }
 
   refreshToken(): Observable<{ access_token: string }> {
