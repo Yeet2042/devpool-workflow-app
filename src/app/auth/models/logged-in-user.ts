@@ -9,6 +9,10 @@ export enum Role {
   ADMIN = 'ADMIN'
 }
 
+export interface CreateDepartment {
+  name: string;
+}
+
 export interface Department {
   department_id: number;
   name: string;

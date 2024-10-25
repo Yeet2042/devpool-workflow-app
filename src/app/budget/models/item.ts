@@ -5,8 +5,10 @@ export enum ItemStatus {
 }
 
 export interface User {
+  department: Department;
   user_id: number;
   name: string;
+  email: string;
   role: Role;
 }
 

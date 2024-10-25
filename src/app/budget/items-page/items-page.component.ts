@@ -18,9 +18,6 @@ import { ItemService } from '../item.service';
   styleUrl: './items-page.component.scss'
 })
 export class ItemsPageComponent {
-  private envConfig = inject(ENV_CONFIG)
-  readonly apiUrl = `${this.envConfig.apiUrl}/items/all/`;
-
   fb = inject(NonNullableFormBuilder)
   authService = inject(AuthService)
   itemService = inject(ItemService)
@@ -42,6 +39,7 @@ export class ItemsPageComponent {
 
   openModal(item: Item) {
     this.isModalOpen = true;
+
     this.selectedItemId = item.item_id,
     this.selectedDepartmentId = item.department.department_id,
     this.fg.patchValue({

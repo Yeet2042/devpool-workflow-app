@@ -23,7 +23,7 @@
       </button>
         <button routerLink="/budget/approve" class="flex items-center justify-between gap-2 bg-green-400 text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
           อนุมัติรายการ
-          @if (departments.length > 0) {
+          @if (pendingCount > 0) {
             <span class="absolute top-[-3px] right-[-3px] block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
           }
         </button>
@@ -60,11 +60,11 @@
           <p class="w-[800px]">{{ department.name }}</p>
         </div>
         <div class="flex space-x-2">
-          <button (click)="openModal()" class="flex items-center gap-2 bg-[#E5C07B] text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+          <button (click)="openModal(department)" class="flex items-center gap-2 bg-[#E5C07B] text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
             <ng-icon name="heroPencilSquareSolid" size="20"></ng-icon>
             แก้ไข
           </button>
-          <button class="flex items-center gap-2 bg-red-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+          <button (click)="onDelete(department)" class="flex items-center gap-2 bg-red-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
             <ng-icon name="heroXMarkSolid" size="20"></ng-icon>
             ลบ
           </button>
@@ -77,18 +77,20 @@
 <div *ngIf="isModalOpen" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
   <div class="relative container py-16 px-8 space-y-8 w-[565px] bg-[#282C34] bg-opacity-90 rounded-lg shadow-xl">
     <h1 class="text-white text-center">แก้ไขแผนก</h1>
-    <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-full py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
-      <input
-        id="name"
-        formControlName="text"
-        type="text"
-        placeholder="ชื่อแผนก"
-        class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
-      />
-    </div>
-    <button type="submit" class="bg-green-400 text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
-      ยืนยัน
-    </button>
+    <form [formGroup]="fg" (ngSubmit)="onSubmit()" class="space-y-8">
+      <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-full py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
+        <input
+          id="name"
+          formControlName="name"
+          type="text"
+          placeholder="ชื่อแผนก"
+          class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
+        />
+      </div>
+      <button type="submit" class="bg-green-400 text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+        ยืนยัน
+      </button>
+    </form>
     <ng-icon (click)="closeModal()" name="heroXMarkSolid" size="24" class="absolute top-0 right-6 text-white"></ng-icon>
   </div>
 </div>
