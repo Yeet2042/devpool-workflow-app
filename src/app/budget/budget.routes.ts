@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { ItemsPageComponent } from './items-page/items-page.component';
 import { ApprovePageComponent } from './approve-page/approve-page.component';
+import { rolesGuard } from '../auth/guards/roles.guard';
+import { Role } from '../auth/models/logged-in-user';
 
 export const routes: Routes = [
   {
@@ -9,7 +11,8 @@ export const routes: Routes = [
   },
   {
     path: 'approve',
-    component: ApprovePageComponent
+    component: ApprovePageComponent,
+    canActivate: [rolesGuard([ Role.ADMIN, Role.APPROVER ])]
   }
 ];
 
