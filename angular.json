@@ -100,6 +100,7 @@
     }
   },
   "cli": {
-    "analytics": "693b30ce-4c5b-4c7f-852e-6b0ed716470a"
+    "analytics": "693b30ce-4c5b-4c7f-852e-6b0ed716470a",
+    "packageManager": "npm"
   }
 }
