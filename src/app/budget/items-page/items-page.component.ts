@@ -81,10 +81,21 @@ export class ItemsPageComponent {
   }
 
   constructor () {
-    this.itemService.list().subscribe((items) => {
-      this.items = items;
-      this.filterItems = items;
-    })
+    const userProfile = this.authService.loggedInUser?.userProfile
+    if (!userProfile) {
+      return
+    }
+    if (userProfile.role === "ADMIN") {
+      this.itemService.list().subscribe((items) => {
+        this.items = items;
+        this.filterItems = items;
+      })
+    } else {
+      this.itemService.listWithDepartment(userProfile.department.name).subscribe((items) => {
+        this.items = items;
+        this.filterItems = items;
+      })
+    }
   }
 
   get approveCount(): number {

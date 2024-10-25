@@ -18,6 +18,10 @@ export class ItemService {
     return this.httpClient.get<Item[]>(`${this.apiUrl}/all`);
   }
 
+  listWithDepartment(department: string) {
+    return this.httpClient.get<Item[]>(`${this.apiUrl}/${department}`);
+  }
+
   add(item: CreateItem) {
     return this.httpClient.post<Item>(this.apiUrl, item);
   }

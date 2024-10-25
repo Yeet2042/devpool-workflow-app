@@ -17,25 +17,31 @@
   </div>
   <div class="flex justify-between gap-4 items-center mt-4 py-4 px-5 w-full bg-[#282C34] bg-opacity-50 element-shadow rounded-lg">
     <div class="flex justify-between items-center w-full">
-      <div class="flex gap-4 items-center">
-        <button routerLink="/budget" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
-          รายการทั้งหมด
-      </button>
-        <button routerLink="/budget/approve" class="flex items-center justify-between gap-2 bg-green-400 text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
-          อนุมัติรายการ
-          @if (items.length > 0) {
-            <span class="absolute top-[-3px] right-[-3px] block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+      @if (authService.loggedInUser; as loggedInUser) {
+        <div class="flex gap-4 items-center">
+          <button routerLink="/budget" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+            รายการทั้งหมด
+          </button>
+          @if (loggedInUser.userProfile.role === "ADMIN" || "APPROVER") {
+            <button routerLink="/budget/approve" class="flex items-center justify-between gap-2 bg-green-400 text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+              อนุมัติรายการ
+              @if (items.length > 0) {
+                <span class="absolute top-[-3px] right-[-3px] block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+              }
+            </button>
           }
-        </button>
-      </div>
-      <div class="flex gap-4 items-center">
-        <button routerLink="/admin/department" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
-          จัดการแผนก
-        </button>
-        <button routerLink="/admin/employee" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
-          จัดการพนักงาน
-        </button>
-      </div>
+        </div>
+        @if (loggedInUser.userProfile.role === "ADMIN") {
+          <div class="flex gap-4 items-center">
+            <button routerLink="/admin/department" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+              จัดการแผนก
+            </button>
+            <button routerLink="/admin/employee" class="flex items-center justify-between gap-2 bg-white text-white px-3 rounded-lg h-[32px] text-base border-none bg-opacity-20 hover:bg-opacity-50 transition duration-300 element-shadow">
+              จัดการพนักงาน
+            </button>
+          </div>
+        }
+      }
     </div>
     <div class="flex items-center bg-[#1D2025] bg-opacity-50 border-none rounded-lg w-[300px] py-[10px] px-[10px] text-white leading-tight focus:outline-none focus:bg-opacity-80 focus:border-primary">
       <ng-icon name="heroMagnifyingGlassSolid" class="mr-2"></ng-icon>

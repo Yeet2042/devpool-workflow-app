@@ -47,9 +47,20 @@ export class ApprovePageComponent {
   }
 
   constructor () {
-    this.itemService.list().subscribe((items) => {
-      this.items = items.filter(item => item.status === ItemStatus.PENDING);
-      this.filterItems = items.filter(item => item.status === ItemStatus.PENDING);
-    })
+    const userProfile = this.authService.loggedInUser?.userProfile
+    if (!userProfile) {
+      return
+    }
+    if (userProfile.role === "ADMIN") {
+      this.itemService.list().subscribe((items) => {
+        this.items = items;
+        this.filterItems = items;
+      })
+    } else {
+      this.itemService.listWithDepartment(userProfile.department.name).subscribe((items) => {
+        this.items = items;
+        this.filterItems = items;
+      })
+    }
   }
 }
