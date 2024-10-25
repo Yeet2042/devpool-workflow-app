@@ -15,41 +15,35 @@ export class AdminService {
 
   authService = inject(AuthService);
 
-  private createHeader() {
-    return new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.loggedInUser?.tokens.access_token}`
-    })
-  }
-
   listUsers() {
-    return this.httpClient.get<Users[]>(`${this.apiUrl}/users/all`, { headers: this.createHeader() });
+    return this.httpClient.get<Users[]>(`${this.apiUrl}/users/all`);
   }
 
   addUser(user: CreateUser) {
-    return this.httpClient.post<CreateUser>(`${this.apiUrl}/users`, user, { headers: this.createHeader() })
+    return this.httpClient.post<CreateUser>(`${this.apiUrl}/users`, user)
   }
 
   edit(user: CreateUser, user_id: number) {
-    return this.httpClient.patch<CreateUser>(`${this.apiUrl}/users/${user_id}`, user, { headers: this.createHeader() });
+    return this.httpClient.patch<CreateUser>(`${this.apiUrl}/users/${user_id}`, user);
   }
 
   delete(user_id: number) {
-    return this.httpClient.delete<void>(`${this.apiUrl}/users/${user_id}`, { headers: this.createHeader() })
+    return this.httpClient.delete<void>(`${this.apiUrl}/users/${user_id}`)
   }
 
   listDepartments() {
-    return this.httpClient.get<Department[]>(`${this.apiUrl}/departments`, { headers: this.createHeader() });
+    return this.httpClient.get<Department[]>(`${this.apiUrl}/departments`);
   }
 
   addDepartment(department: CreateDepartment) {
-    return this.httpClient.post<CreateDepartment>(`${this.apiUrl}/departments`, department, { headers: this.createHeader() })
+    return this.httpClient.post<CreateDepartment>(`${this.apiUrl}/departments`, department)
   }
 
   editDepartment(department: CreateDepartment, department_id: number) {
-    return this.httpClient.patch<CreateDepartment>(`${this.apiUrl}/departments/${department_id}`, department, { headers: this.createHeader() });
+    return this.httpClient.patch<CreateDepartment>(`${this.apiUrl}/departments/${department_id}`, department);
   }
 
   deleteDepartment(department_id: number) {
-    return this.httpClient.delete<void>(`${this.apiUrl}/departments/${department_id}`, { headers: this.createHeader() })
+    return this.httpClient.delete<void>(`${this.apiUrl}/departments/${department_id}`)
   }
 }

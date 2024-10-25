@@ -14,35 +14,27 @@ export class ItemService {
 
   authService = inject(AuthService)
 
-  private createHeader() {
-    return new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.loggedInUser?.tokens.access_token}`
-    })
-  }
-
   list() {
-    return this.httpClient.get<Item[]>(`${this.apiUrl}/all`, { headers: this.createHeader() });
+    return this.httpClient.get<Item[]>(`${this.apiUrl}/all`);
   }
 
   add(item: CreateItem) {
-    return this.httpClient.post<Item>(this.apiUrl, item, { headers: this.createHeader() });
+    return this.httpClient.post<Item>(this.apiUrl, item);
   }
 
   edit(item: EditIem, item_id: number, department_id: number) {
-    return this.httpClient.patch<Item>(`${this.apiUrl}/${department_id}/${item_id}`, item, { headers: this.createHeader() });
+    return this.httpClient.patch<Item>(`${this.apiUrl}/${department_id}/${item_id}`, item);
   }
 
   delete(item_id: number, department_id: number) {
-    return this.httpClient.delete<void>(`${this.apiUrl}/${department_id}/${item_id}`, { headers: this.createHeader() })
+    return this.httpClient.delete<void>(`${this.apiUrl}/${department_id}/${item_id}`)
   }
 
   approve(item_id: number, department_id: number) {
-    return this.httpClient.patch(`${this.apiUrl}/${department_id}/${item_id}/approve`, {}, {
-      headers: this.createHeader()
-    });
+    return this.httpClient.patch(`${this.apiUrl}/${department_id}/${item_id}/approve`, {});
   }
 
   reject(item_id: number, department_id: number) {
-    return this.httpClient.patch(`${this.apiUrl}/${department_id}/${item_id}/reject`, {}, { headers: this.createHeader() });
+    return this.httpClient.patch(`${this.apiUrl}/${department_id}/${item_id}/reject`, {});
   }
 }
