@@ -4,15 +4,15 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassSolid, heroPencilSquareSolid, heroPlusSolid, heroTrashSolid, heroXMarkSolid  } from '@ng-icons/heroicons/solid';
 import { Item, ItemStatus } from '../models/item';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ENV_CONFIG } from '../../../env.config';
 import { DatePipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ItemService } from '../item.service';
+import { DecimalFormatPipe } from '../../pipe/decimal-format.pipe';
 
 @Component({
   selector: 'app-items-page',
   standalone: true,
-  imports: [NgIconComponent, DatePipe, RouterLink, NgIf, ReactiveFormsModule],
+  imports: [NgIconComponent, DatePipe, RouterLink, NgIf, ReactiveFormsModule, DecimalFormatPipe],
   providers: [provideIcons({ heroMagnifyingGlassSolid, heroPencilSquareSolid, heroPlusSolid, heroXMarkSolid, heroTrashSolid })],
   templateUrl: './items-page.component.html',
   styleUrl: './items-page.component.scss'

@@ -2,9 +2,8 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassSolid, heroXMarkSolid, heroCheckSolid } from '@ng-icons/heroicons/solid';
-import { Item, ItemStatus } from '../models/item';
+import { Item } from '../models/item';
 import { FormControl } from '@angular/forms';
-import { ENV_CONFIG } from '../../../env.config';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ItemService } from '../item.service';
@@ -18,9 +17,6 @@ import { ItemService } from '../item.service';
   styleUrl: './approve-page.component.scss'
 })
 export class ApprovePageComponent {
-  private envConfig = inject(ENV_CONFIG)
-  readonly apiUrl = `${this.envConfig.apiUrl}/items/all/`;
-
   authService = inject(AuthService)
   itemService = inject(ItemService)
 

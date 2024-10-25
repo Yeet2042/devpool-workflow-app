@@ -79,7 +79,7 @@
           <p class="w-[150px]">{{ item.created_at | date: 'short' }}</p>
           <p class="w-[150px]">{{ item.updated_at | date: 'short' }}</p>
           <p class="w-[300px]">{{ item.title + ' x ' + item.quantity }}</p>
-          <p class="w-[128px]">{{ item.amount }}</p>
+          <p class="w-[128px]">{{ item.amount | decimalFormat: 4}}</p>
           <p class="w-[128px]">{{ item.user.name }}</p>
           @if (item.status === 'APPROVED') {
             <p class="w-[128px] bg-green-400 text-green-400 bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
