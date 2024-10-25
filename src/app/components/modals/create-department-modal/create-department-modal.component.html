@@ -16,6 +16,10 @@
             class="bg-transparent border-none w-full text-white leading-tight focus:outline-none placeholder:text-gray-400"
           />
         </div>
+        @if (error) {
+          <p *ngIf="error.status === 400" class="text-red-400 text-end">กรุณาใส่ข้อมูลให้ครบถ้วน!</p>
+          <p *ngIf="error.status !== 400" class="text-red-400 text-end">เกิดข้อผิดพลาด!</p>
+        }
         <button type="submit" class="bg-green-400 text-white px-6 rounded-lg h-[44px] w-full text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
           ยืนยัน
         </button>

@@ -61,6 +61,7 @@ export class EmployeePageComponent {
   closeModal() {
     this.isModalOpen = false;
     this.fg.reset();
+    this.error = '';
   }
 
   error?: any

@@ -3,16 +3,17 @@ import { AuthService } from '../../auth/auth.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassSolid, heroPencilSquareSolid, heroPlusSolid, heroTrashSolid, heroXMarkSolid  } from '@ng-icons/heroicons/solid';
 import { Item, ItemStatus } from '../models/item';
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ItemService } from '../item.service';
 import { DecimalFormatPipe } from '../../pipe/decimal-format.pipe';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-items-page',
   standalone: true,
-  imports: [NgIconComponent, DatePipe, RouterLink, NgIf, ReactiveFormsModule, DecimalFormatPipe],
+  imports: [NgIconComponent, DatePipe, RouterLink, NgIf, ReactiveFormsModule, DecimalFormatPipe, FormsModule],
   providers: [provideIcons({ heroMagnifyingGlassSolid, heroPencilSquareSolid, heroPlusSolid, heroXMarkSolid, heroTrashSolid })],
   templateUrl: './items-page.component.html',
   styleUrl: './items-page.component.scss'
@@ -96,6 +97,12 @@ export class ItemsPageComponent {
         this.filterItems = items;
       })
     }
+
+    this.filterInput.valueChanges
+      .pipe(map((keyword) => keyword.toLocaleLowerCase()))
+      .subscribe((keyword) => {
+        this.filterItems = this.items.filter((item) => item.title.toLocaleLowerCase().includes(keyword));
+      });
   }
 
   get approveCount(): number {
