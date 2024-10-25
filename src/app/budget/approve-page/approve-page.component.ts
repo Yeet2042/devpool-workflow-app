@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroMagnifyingGlassSolid, heroXMarkSolid, heroCheckSolid } from '@ng-icons/heroicons/solid';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Item, ItemStatus } from '../models/item';
 import { FormControl } from '@angular/forms';
 import { ENV_CONFIG } from '../../../env.config';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-approve-page',
@@ -22,17 +22,32 @@ export class ApprovePageComponent {
   readonly apiUrl = `${this.envConfig.apiUrl}/items/all/`;
 
   authService = inject(AuthService)
-  httpClient = inject(HttpClient);
+  itemService = inject(ItemService)
 
   items: Item[] = [];
   filterItems = this.items;
   filterInput = new FormControl<string>('', { nonNullable: true })
 
-  constructor () {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.loggedInUser?.tokens.access_token}`
+  onApprove(item: Item) {
+    this.itemService.approve(item.item_id, item.department.department_id).subscribe({
+      next: () => {
+        window.location.reload();
+      },
+      error: (error) => console.log(error)
     })
-    this.httpClient.get<Item[]>(this.apiUrl, { headers }).subscribe((items) => {
+  }
+
+  onReject(item: Item) {
+    this.itemService.reject(item.item_id, item.department.department_id).subscribe({
+      next: () => {
+        window.location.reload();
+      },
+      error: (error) => console.log(error)
+    })
+  }
+
+  constructor () {
+    this.itemService.list().subscribe((items) => {
       this.items = items.filter(item => item.status === ItemStatus.PENDING);
       this.filterItems = items.filter(item => item.status === ItemStatus.PENDING);
     })

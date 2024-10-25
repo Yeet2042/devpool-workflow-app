@@ -10,6 +10,23 @@ export interface User {
   role: Role;
 }
 
+export interface UserWithId {
+  user_id: number;
+}
+
+export interface CreateItem {
+  user: UserWithId;
+  title: string;
+  amount: number;
+  quantity: number;
+}
+
+export interface EditIem {
+  title: string;
+  amount: number;
+  quantity: number;
+}
+
 export interface Item {
   item_id: number;
   title: string;

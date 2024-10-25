@@ -69,12 +69,12 @@
           <p class="w-[128px]">{{ item.user.name }}</p>
           <p class="w-[128px] bg-[#E5C07B] text-[#E5C07B] bg-opacity-30 py-1 rounded-lg font-bold">{{ item.status }}</p>
         </div>
-        <div class="flex space-x-2">
+        <div (click)="onApprove(item)" class="flex space-x-2">
           <button class="flex items-center gap-2 bg-green-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
             <ng-icon name="heroCheckSolid" size="20"></ng-icon>
             อนุมัติ
           </button>
-          <button class="flex items-center gap-2 bg-red-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
+          <button (click)="onReject(item)" class="flex items-center gap-2 bg-red-400 text-white px-3 rounded-lg h-[44px] text-base border-none bg-opacity-40 hover:bg-opacity-60 transition duration-300 element-shadow">
             <ng-icon name="heroXMarkSolid" size="20"></ng-icon>
             ไม่อนุมัติ
           </button>
